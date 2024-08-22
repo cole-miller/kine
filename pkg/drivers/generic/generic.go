@@ -227,6 +227,15 @@ func Open(ctx context.Context, driverName, dataSourceName string, paramCharacter
 
 	configureConnectionPooling(db)
 
+	go func() {
+		logrus.Debugf("Started logging db stats for dqlite")
+		for {
+			stats := db.Stats()
+			logrus.Debugf("<db-stats>: %#+v", stats)
+			time.Sleep(time.Second * 3)
+		}
+	}()
+
 	return &Generic{
 		DB: db,
 
