@@ -139,8 +139,8 @@ type Generic struct {
 }
 
 func configureConnectionPooling(db *sql.DB) {
-	db.SetMaxIdleConns(5)
-	db.SetMaxOpenConns(5)
+	db.SetMaxIdleConns(100)
+	db.SetMaxOpenConns(100)
 	db.SetConnMaxLifetime(60 * time.Second)
 }
 
